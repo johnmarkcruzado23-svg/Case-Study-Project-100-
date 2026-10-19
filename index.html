@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kapitolyo High School | SIMS</title>
+<style>
+:root {
+  --navy: #10203b;
+  --blue: #1f5eff;
+  --bg: #f4f7fb;
+  --text: #182338;
+  --muted: #718096;
+  --border: #e3e9f2;
+  --green: #15803d;
+  --red: #dc2626;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+button, input, select, textarea { font: inherit; }
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+button:hover { opacity: .88; }
+.primary { background: var(--blue); color: white; }
+.secondary { background: white; border: 1px solid var(--border); }
+.danger { background: #fff0f0; color: var(--red); }
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+
+/* LOGIN */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: linear-gradient(135deg,#edf2ff,#f4f7fb,#e8eef8);
+}
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 18px 55px #10203b1a;
+}
+.login-logo {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  color: white;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+.login-card h1 { font-size: 24px; margin: 0 0 8px; }
+.login-card p { font-size: 13px; line-height: 1.6; }
+.login-form { display: grid; gap: 16px; }
+.login-form button { width: 100%; padding: 12px; }
+.demo-note {
+  margin-top: 17px;
+  padding: 12px;
+  background: #f7f9fc;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* MAIN LAYOUT */
+.app { display: flex; min-height: 100vh; }
+.sidebar {
+  width: 245px;
+  flex-shrink: 0;
+  padding: 24px 15px;
+  background: var(--navy);
+  color: white;
+}
+.brand { padding: 0 12px 25px; }
+.brand h2 { font-size: 18px; margin: 0 0 7px; }
+.brand p { font-size: 11px; color: #b8c6df; line-height: 1.5; }
+.nav-label {
+  padding: 12px;
+  color: #9bacc8;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.nav { display: grid; gap: 4px; }
+.nav button {
+  background: transparent;
+  color: #dce6f7;
+  text-align: left;
+  padding: 12px;
+  font-weight: 500;
+}
+.nav button:hover, .nav button.active { background: #203657; color: white; }
+.nav button.active { border-left: 3px solid #6f97ff; }
+.sidebar-bottom {
+  margin-top: 26px;
+  padding: 14px 12px;
+  border-top: 1px solid #31415b;
+  font-size: 12px;
+  color: #b8c6df;
+}
+.main { flex: 1; min-width: 0; }
+.topbar {
+  min-height: 72px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.topbar h1 { font-size: 20px; margin: 0; }
+.top-user { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.content { max-width: 1500px; margin: auto; padding: 27px 28px; }
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 23px;
+}
+.page-heading h2 { margin: 0 0 7px; font-size: 25px; }
+.page-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+.button-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.top-avatar {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: #e7edff;
+  color: #214fcb;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+/* CARDS AND TABLES */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.stat-card, .panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  box-shadow: 0 3px 12px #10203b0b;
+}
+.stat-card { padding: 20px; }
+.stat-label { font-size: 12px; color: var(--muted); }
+.stat-value { font-size: 29px; font-weight: 800; margin: 11px 0 5px; }
+.stat-note { font-size: 11px; color: var(--muted); }
+.panel { padding: 22px; margin-bottom: 22px; }
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.panel-heading h3 { font-size: 16px; margin: 0; }
+.panel-heading p { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 680px; }
+th {
+  text-align: left;
+  background: #f7f9fc;
+  color: #65748b;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 13px;
+}
+td { padding: 13px; border-bottom: 1px solid #edf1f6; font-size: 12px; }
+tbody tr:last-child td { border-bottom: 0; }
+.pill {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #e9f8ef;
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 800;
+}
+.pill.inactive { background: #fff0f0; color: var(--red); }
+.pill.pending { background: #fff5dc; color: #946200; }
+.pill.role { background: #edf2ff; color: #3156a5; }
+.actions { display: flex; gap: 6px; }
+.actions button { padding: 7px 9px; font-size: 11px; }
+.empty { padding: 28px; text-align: center; color: var(--muted); font-size: 13px; }
+
+/* FORMS AND REPORTS */
+.field { min-width: 0; }
+.field label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 7px; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d8e0ec;
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  font-size: 13px;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid #c6d6ff;
+  border-color: var(--blue);
+}
+.filters {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+.form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 15px; }
+.full { grid-column: 1/-1; }
+.form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 100px minmax(60px,1fr) 28px;
+  gap: 10px;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 12px;
+}
+.bar-track { height: 10px; border-radius: 20px; background: #edf1f8; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--blue); border-radius: 20px; }
+.notice {
+  background: #edf4ff;
+  border: 1px solid #d6e4ff;
+  color: #234477;
+  padding: 12px 14px;
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.footer-note { color: var(--muted); font-size: 11px; margin-top: 16px; }
+
+/* MODALS */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #0a162a8c;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 20;
+}
+.modal-backdrop.show { display: flex; }
+.modal {
+  background: white;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 15px;
+  padding: 25px;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.modal-header h3 { margin: 0 0 6px; }
+.modal-header p { margin: 0; color: var(--muted); font-size: 12px; }
+.close-btn { background: #f0f3f8; padding: 7px 10px; }
+
+@media(max-width:1050px) {
+  .stats, .filters { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:760px) {
+  .app { display: block; }
+  .sidebar { width: 100%; padding: 15px; }
+  .brand { padding-bottom: 12px; }
+  .nav-label, .sidebar-bottom { display: none; }
+  .nav { display: flex; overflow-x: auto; }
+  .nav button { white-space: nowrap; padding: 10px; }
+  .topbar { padding: 14px 16px; }
+  .content { padding: 20px 14px; }
+  .panel { padding: 16px; }
+  .chart-grid, .form-grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .stats { gap: 10px; }
+  .stat-card { padding: 15px; }
+  .stat-value { font-size: 24px; }
+}
+@media print {
+  .sidebar, .topbar, .no-print { display: none !important; }
+  .content { padding: 0; max-width: none; }
+  .app { display: block; }
+  .panel, .stat-card { box-shadow: none; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="login-logo">KHS</div>
+    <h1>Welcome Back</h1>
+    <p class="muted">Sign in to the Kapitolyo High School Student Information Management System.</p>
+    <form id="loginForm" class="login-form">
+      <div class="field">
+        <label for="loginUsername">Username</label>
+        <input id="loginUsername" autocomplete="username" required placeholder="Enter username">
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Enter password">
+      </div>
+      <button class="primary" type="submit">Sign In</button>
+    </form>
+    <div class="demo-note">
+      <strong>Demo Login</strong><br>
+      Username: <code>admin</code><br>
+      Password: <code>admin123</code><br>
+      This is a front-end demonstration, not secure authentication.
+    </div>
+  </div>
+</section>
+
+<!-- MAIN APPLICATION -->
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <div class="brand">
+      <h2>Kapitolyo High School</h2>
+      <p>Student Information Management System</p>
+    </div>
+    <div class="nav-label">Main Menu</div>
+    <nav class="nav" id="navigation">
+      <button data-page="dashboard" class="active">▦ &nbsp; Dashboard</button>
+      <button data-page="students">♙ &nbsp; Student Management</button>
+      <button data-page="add">＋ &nbsp; Add Student</button>
+      <button data-page="search">⌕ &nbsp; Search / Filter</button>
+      <button data-page="reports">▤ &nbsp; Reports</button>
+      <button data-page="users">⚙ &nbsp; User Management</button>
+    </nav>
+    <div class="sidebar-bottom">Kapitolyo High School<br>SIMS · Demo Version</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1 id="topTitle">Dashboard</h1>
+      <div class="top-user">
+        <div class="top-avatar">A</div>
+        <span id="currentUserLabel">Administrator</span>
+        <button class="secondary" onclick="confirmLogout()">Logout</button>
+      </div>
+    </header>
+    <div id="content" class="content"></div>
+  </main>
+</div>
+
+<!-- STUDENT FORM MODAL -->
+<div class="modal-backdrop" id="studentModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3 id="studentModalTitle">Add Student</h3>
+        <p>Enter the student's information below.</p>
+      </div>
+      <button class="close-btn" onclick="closeStudentModal()" type="button">✕</button>
+    </div>
+    <form id="studentForm">
+      <input type="hidden" id="studentRecordId">
+      <div class="form-grid">
+        <div class="field">
+          <label for="studentId">Student ID *</label>
+          <input id="studentId" required maxlength="40" placeholder="KHS-2026-0004">
+        </div>
+        <div class="field">
+          <label for="studentName">Full Name *</label>
+          <input id="studentName" required maxlength="120" placeholder="Full name">
+        </div>
+        <div class="field">
+          <label for="studentGrade">Grade Level *</label>
+          <select id="studentGrade" required>
+            <option value="">Select grade</option>
+            <option>Grade 7</option><option>Grade 8</option>
+            <option>Grade 9</option><option>Grade 10</option>
+            <option>Grade 11</option><option>Grade 12</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="studentStrand">Strand / Program</label>
+          <select id="studentStrand">
+            <option value="">Not specified</option>
+            <option>STEM</option><option>ABM</option><option>HUMSS</option>
+            <option>GAS</option><option>TVL</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="studentContact">Contact Number</label>
+          <input id="studentContact" maxlength="30" placeholder="09xx-xxx-xxxx">
+        </div>
+        <div class="field">
+          <label for="studentEmail">Email Address</label>
+          <input id="studentEmail" type="email" maxlength="150" placeholder="student@email.com">
+        </div>
+        <div class="field">
+          <label for="studentDob">Date of Birth</label>
+          <input id="studentDob" type="date">
+        </div>
+        <div class="field">
+          <label for="studentGender">Gender</label>
+          <select id="studentGender">
+            <option value="">Select</option>
+            <option>Female</option><option>Male</option><option>Prefer not to say</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="studentAddress">Address</label>
+          <textarea id="studentAddress" rows="2" maxlength="250" placeholder="Home address"></textarea>
+        </div>
+        <div class="field">
+          <label for="studentStatus">Status *</label>
+          <select id="studentStatus" required>
+            <option>Active</option><option>Inactive</option><option>Pending</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="studentDateAdded">Date Added</label>
+          <input id="studentDateAdded" type="date">
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="secondary" onclick="closeStudentModal()">Cancel</button>
+        <button type="submit" class="primary">Save Student</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- USER FORM MODAL -->
+<div class="modal-backdrop" id="userModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3 id="userModalTitle">Add User</h3>
+        <p>Manage a demo user profile.</p>
+      </div>
+      <button class="close-btn" onclick="closeUserModal()" type="button">✕</button>
+    </div>
+    <form id="userForm">
+      <input type="hidden" id="userRecordId">
+      <div class="form-grid">
+        <div class="field full">
+          <label for="userFullName">Full Name *</label>
+          <input id="userFullName" required maxlength="100">
+        </div>
+        <div class="field">
+          <label for="userUsername">Username *</label>
+          <input id="userUsername" required maxlength="40">
+        </div>
+        <div class="field">
+          <label for="userEmail">Email *</label>
+          <input id="userEmail" type="email" required maxlength="150">
+        </div>
+        <div class="field">
+          <label for="userRole">Role *</label>
+          <select id="userRole" required>
+            <option>Administrator</option><option>Registrar</option>
+            <option>Teacher</option><option>Staff</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="userStatus">Status *</label>
+          <select id="userStatus" required><option>Active</option><option>Inactive</option></select>
+        </div>
+      </div>
+      <p class="footer-note">User profiles do not create real login credentials or enforce permissions.</p>
+      <div class="form-actions">
+        <button type="button" class="secondary" onclick="closeUserModal()">Cancel</button>
+        <button class="primary" type="submit">Save User</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const STUDENTS_KEY = "khs_sims_students_v1";
+const USERS_KEY = "khs_sims_users_v1";
+const DEMO_USER = { username: "admin", password: "admin123", name: "Administrator" };
+
+const seedStudents = [
+  {id:"KHS-2026-0001",name:"Juan Dela Cruz",grade:"Grade 11",strand:"STEM",contact:"0917-123-4567",email:"",status:"Active",dateAdded:"2026-01-10",dob:"",gender:"",address:""},
+  {id:"KHS-2026-0002",name:"Maria Santos",grade:"Grade 12",strand:"ABM",contact:"0918-222-3344",email:"",status:"Active",dateAdded:"2026-01-12",dob:"",gender:"",address:""},
+  {id:"KHS-2026-0003",name:"Carlos Reyes",grade:"Grade 11",strand:"HUMSS",contact:"0919-555-6677",email:"",status:"Active",dateAdded:"2026-01-15",dob:"",gender:"",address:""}
+];
+
+const seedUsers = [
+  {id:"USR-001",fullName:"System Administrator",username:"admin",email:"admin@kapitolyo.edu",role:"Administrator",status:"Active",dateAdded:"2026-01-01"},
+  {id:"USR-002",fullName:"School Registrar",username:"registrar",email:"registrar@kapitolyo.edu",role:"Registrar",status:"Active",dateAdded:"2026-01-05"},
+  {id:"USR-003",fullName:"Sample Teacher",username:"teacher",email:"teacher@kapitolyo.edu",role:"Teacher",status:"Active",dateAdded:"2026-01-10"}
+];
+
+let currentPage = "dashboard";
+let currentUser = "Administrator";
+
+function readList(key, seed) {
+  try {
+    const value = localStorage.getItem(key);
+    if (value === null) {
+      localStorage.setItem(key, JSON.stringify(seed));
+      return seed.map(item => ({...item}));
+    }
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+function getStudents() { return readList(STUDENTS_KEY, seedStudents); }
+function getUsers() { return readList(USERS_KEY, seedUsers); }
+function saveList(key, list) {
+  try {
+    localStorage.setItem(key, JSON.stringify(list));
+    return true;
+  } catch (error) {
+    alert("Could not save data in browser storage.");
+    return false;
+  }
+}
+function saveStudents(list) { return saveList(STUDENTS_KEY, list); }
+function saveUsers(list) { return saveList(USERS_KEY, list); }
+function today() { return new Date().toISOString().slice(0,10); }
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+function statusPill(status) {
+  const value = status || "Active";
+  const cls = value === "Inactive" ? "inactive" : value === "Pending" ? "pending" : "";
+  return `<span class="pill ${cls}">${esc(value)}</span>`;
+}
+function initials(name) {
+  return String(name || "U").trim().split(/\s+/).slice(0,2).map(x => x[0] || "").join("").toUpperCase();
+}
+
+/* LOGIN AND NAVIGATION */
+document.getElementById("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const username = document.getElementById("loginUsername").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  if (username === DEMO_USER.username && password === DEMO_USER.password) {
+    sessionStorage.setItem("khs_sims_logged_in", "true");
+    currentUser = DEMO_USER.name;
+    showApp();
+  } else {
+    alert("Invalid username or password. Use the demo credentials shown on the login page.");
+  }
+});
+
+function showApp() {
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("currentUserLabel").textContent = currentUser;
+  renderPage("dashboard");
+}
+function confirmLogout() {
+  if (!confirm("Are you sure you want to log out?")) return;
+  sessionStorage.removeItem("khs_sims_logged_in");
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("loginScreen").classList.remove("hidden");
+  document.getElementById("loginPassword").value = "";
+  document.getElementById("loginUsername").value = "";
+}
+document.getElementById("navigation").addEventListener("click", event => {
+  const button = event.target.closest("button[data-page]");
+  if (button) renderPage(button.dataset.page);
+});
+
+function renderPage(page) {
+  currentPage = page;
+  document.querySelectorAll("#navigation button").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === page);
+  });
+  const titles = {
+    dashboard:"Dashboard", students:"Student Management", add:"Add Student",
+    search:"Search / Filter", reports:"Reports", users:"User Management"
+  };
+  document.getElementById("topTitle").textContent = titles[page] || "Dashboard";
+  const content = document.getElementById("content");
+
+  if (page === "dashboard") content.innerHTML = dashboardHTML();
+  if (page === "students") content.innerHTML = studentsHTML(false);
+  if (page === "add") content.innerHTML = addPageHTML();
+  if (page === "search") content.innerHTML = studentsHTML(true);
+  if (page === "reports") content.innerHTML = reportsHTML();
+  if (page === "users") content.innerHTML = usersHTML();
+
+  if (page === "dashboard") renderDashboard();
+  if (page === "students" || page === "search") renderStudentTable();
+  if (page === "reports") renderReports();
+  if (page === "users") renderUserTable();
+}
+
+/* DASHBOARD */
+function dashboardHTML() {
+  return `
+  <div class="page-heading">
+    <div><h2>Dashboard Overview</h2><p>Welcome back. Here's what's happening at your school.</p></div>
+    <div class="button-row">
+      <button class="primary" onclick="renderPage('add')">＋ Add Student</button>
+      <button class="secondary" onclick="renderPage('reports')">View Reports</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value" id="dashTotal">0</div><div class="stat-note">All recorded profiles</div></div>
+    <div class="stat-card"><div class="stat-label">Active Students</div><div class="stat-value" id="dashActive">0</div><div class="stat-note">Currently active</div></div>
+    <div class="stat-card"><div class="stat-label">Inactive Students</div><div class="stat-value" id="dashInactive">0</div><div class="stat-note">Currently inactive</div></div>
+    <div class="stat-card"><div class="stat-label">System Users</div><div class="stat-value" id="dashUsers">0</div><div class="stat-note">Demo user profiles</div></div>
+  </div>
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Recently Added Students</h3><p>Latest student records in the system.</p></div><button class="secondary" onclick="renderPage('students')">View All Students</button></div>
+    <div class="table-wrap"><table><thead><tr><th>Student ID</th><th>Name</th><th>Grade</th><th>Strand</th><th>Status</th><th>Action</th></tr></thead><tbody id="recentStudents"></tbody></table></div>
+    <div id="dashEmpty" class="empty hidden">No student records yet. Add your first student.</div>
+  </section>
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Quick Actions</h3><p>Navigate to common system tasks.</p></div></div>
+    <div class="button-row">
+      <button class="secondary" onclick="renderPage('students')">Manage Students</button>
+      <button class="secondary" onclick="renderPage('search')">Search Records</button>
+      <button class="secondary" onclick="renderPage('reports')">Generate Reports</button>
+      <button class="secondary" onclick="renderPage('users')">Manage Users</button>
+    </div>
+  </section>`;
+}
+function renderDashboard() {
+  const students = getStudents();
+  document.getElementById("dashTotal").textContent = students.length;
+  document.getElementById("dashActive").textContent = students.filter(s => (s.status || "Active") === "Active").length;
+  document.getElementById("dashInactive").textContent = students.filter(s => s.status === "Inactive").length;
+  document.getElementById("dashUsers").textContent = getUsers().length;
+  const recent = [...students].sort((a,b) => (b.dateAdded || "").localeCompare(a.dateAdded || "")).slice(0,5);
+  document.getElementById("recentStudents").innerHTML = recent.map(s => `
+    <tr><td>${esc(s.id)}</td><td>${esc(s.name)}</td><td>${esc(s.grade)}</td>
+    <td>${esc(s.strand || "—")}</td><td>${statusPill(s.status)}</td>
+    <td><button class="secondary" onclick="editStudent('${esc(s.id)}')">Edit</button></td></tr>`).join("");
+  document.getElementById("dashEmpty").classList.toggle("hidden", students.length > 0);
+}
+
+/* STUDENT MANAGEMENT AND SEARCH */
+function studentsHTML(search) {
+  return `
+  <div class="page-heading">
+    <div><h2>${search ? "Search / Filter Students" : "Student Management"}</h2>
+    <p>${search ? "Find student records using keywords and filters." : "View, add, update, or remove student records."}</p></div>
+    <div class="button-row">
+      <button class="secondary" onclick="exportStudentsCSV()">Export CSV</button>
+      <button class="primary" onclick="openStudentModal()">＋ Add Student</button>
+    </div>
+  </div>
+  ${search ? `
+  <section class="panel">
+    <div class="filters">
+      <div class="field"><label for="studentSearch">Search</label><input id="studentSearch" placeholder="Name, ID, contact..." oninput="renderStudentTable()"></div>
+      <div class="field"><label for="filterGrade">Grade Level</label><select id="filterGrade" onchange="renderStudentTable()"><option value="">All Grades</option>${gradeOptions()}</select></div>
+      <div class="field"><label for="filterStrand">Strand</label><select id="filterStrand" onchange="renderStudentTable()"><option value="">All Strands</option>${strandOptions()}</select></div>
+      <div class="field"><label for="filterStatus">Status</label><select id="filterStatus" onchange="renderStudentTable()"><option value="">All Statuses</option><option>Active</option><option>Inactive</option><option>Pending</option></select></div>
+    </div>
+    <button class="secondary" onclick="clearStudentFilters()">Clear Filters</button>
+  </section>` : ""}
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Student Records</h3><p id="studentResultCount">Student information stored in the system.</p></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Student ID</th><th>Student Name</th><th>Grade</th><th>Strand</th><th>Contact</th><th>Status</th><th>Actions</th></tr></thead><tbody id="studentTable"></tbody></table></div>
+    <div id="studentEmpty" class="empty hidden">No matching student records found.</div>
+  </section>`;
+}
+function gradeOptions() {
+  return ["Grade 7","Grade 8","Grade 9","Grade 10","Grade 11","Grade 12"].map(x => `<option>${x}</option>`).join("");
+}
+function strandOptions() {
+  return ["STEM","ABM","HUMSS","GAS","TVL","Other"].map(x => `<option>${x}</option>`).join("");
+}
+function renderStudentTable() {
+  const table = document.getElementById("studentTable");
+  if (!table) return;
+  const all = getStudents();
+  const search = (document.getElementById("studentSearch")?.value || "").trim().toLowerCase();
+  const grade = document.getElementById("filterGrade")?.value || "";
+  const strand = document.getElementById("filterStrand")?.value || "";
+  const status = document.getElementById("filterStatus")?.value || "";
+  const filtered = all.filter(s =>
+    (!search || [s.id,s.name,s.contact,s.email].some(v => String(v || "").toLowerCase().includes(search))) &&
+    (!grade || s.grade === grade) &&
+    (!strand || s.strand === strand) &&
+    (!status || (s.status || "Active") === status)
+  );
+  table.innerHTML = filtered.map(s => `
+    <tr><td>${esc(s.id)}</td><td><strong>${esc(s.name)}</strong>${s.email ? `<div class="muted">${esc(s.email)}</div>` : ""}</td>
+    <td>${esc(s.grade)}</td><td>${esc(s.strand || "—")}</td><td>${esc(s.contact || "—")}</td>
+    <td>${statusPill(s.status || "Active")}</td>
+    <td><div class="actions"><button class="secondary" onclick="editStudent('${esc(s.id)}')">Edit</button><button class="danger" onclick="deleteStudent('${esc(s.id)}')">Delete</button></div></td></tr>
+  `).join("");
+  document.getElementById("studentEmpty").classList.toggle("hidden", filtered.length > 0);
+  const count = document.getElementById("studentResultCount");
+  if (count) count.textContent = `Showing ${filtered.length} of ${all.length} student record(s).`;
+}
+function clearStudentFilters() {
+  ["studentSearch","filterGrade","filterStrand","filterStatus"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  renderStudentTable();
+}
+function addPageHTML() {
+  return `<div class="page-heading"><div><h2>Add Student</h2><p>Create a new student record.</p></div></div>
+  <section class="panel"><p class="muted">Use the button below to open the student entry form.</p><button class="primary" onclick="openStudentModal()">Open Student Form</button></section>`;
+}
+
+/* ADD, EDIT, DELETE STUDENTS */
+function openStudentModal(id) {
+  document.getElementById("studentForm").reset();
+  document.getElementById("studentRecordId").value = "";
+  document.getElementById("studentModalTitle").textContent = "Add Student";
+  document.getElementById("studentDateAdded").value = today();
+
+  if (id) {
+    const s = getStudents().find(x => x.id === id);
+    if (!s) { alert("Student record not found."); return; }
+    document.getElementById("studentRecordId").value = s.id;
+    document.getElementById("studentId").value = s.id || "";
+    document.getElementById("studentName").value = s.name || "";
+    document.getElementById("studentGrade").value = s.grade || "";
+    document.getElementById("studentStrand").value = s.strand || "";
+    document.getElementById("studentContact").value = s.contact || "";
+    document.getElementById("studentEmail").value = s.email || "";
+    document.getElementById("studentDob").value = s.dob || "";
+    document.getElementById("studentGender").value = s.gender || "";
+    document.getElementById("studentAddress").value = s.address || "";
+    document.getElementById("studentStatus").value = s.status || "Active";
+    document.getElementById("studentDateAdded").value = s.dateAdded || today();
+    document.getElementById("studentModalTitle").textContent = "Edit Student";
+  }
+  document.getElementById("studentModal").classList.add("show");
+}
+function closeStudentModal() {
+  document.getElementById("studentModal").classList.remove("show");
+}
+document.getElementById("studentForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const oldId = document.getElementById("studentRecordId").value;
+  const student = {
+    id: document.getElementById("studentId").value.trim(),
+    name: document.getElementById("studentName").value.trim(),
+    grade: document.getElementById("studentGrade").value,
+    strand: document.getElementById("studentStrand").value,
+    contact: document.getElementById("studentContact").value.trim(),
+    email: document.getElementById("studentEmail").value.trim(),
+    dob: document.getElementById("studentDob").value,
+    gender: document.getElementById("studentGender").value,
+    address: document.getElementById("studentAddress").value.trim(),
+    status: document.getElementById("studentStatus").value,
+    dateAdded: document.getElementById("studentDateAdded").value || today()
+  };
+  if (!student.id || !student.name || !student.grade) {
+    alert("Please complete all required fields.");
+    return;
+  }
+  const all = getStudents();
+  if (all.some(s => s.id.toLowerCase() === student.id.toLowerCase() && s.id !== oldId)) {
+    alert("That Student ID already exists.");
+    return;
+  }
+  if (oldId) {
+    const index = all.findIndex(s => s.id === oldId);
+    if (index < 0) { alert("Student record not found."); return; }
+    all[index] = student;
+  } else {
+    all.push(student);
+  }
+  if (saveStudents(all)) {
+    closeStudentModal();
+    if (currentPage === "add") renderPage("students");
+    else if (currentPage === "dashboard") renderDashboard();
+    else if (currentPage === "reports") renderReports();
+    else renderStudentTable();
+  }
+});
+function editStudent(id) { openStudentModal(id); }
+function deleteStudent(id) {
+  const student = getStudents().find(s => s.id === id);
+  if (!student) return;
+  if (!confirm(`Delete ${student.name} (${student.id})? This cannot be undone.`)) return;
+  if (saveStudents(getStudents().filter(s => s.id !== id))) {
+    if (currentPage === "dashboard") renderDashboard();
+    else renderStudentTable();
+  }
+}
+
+/* CSV EXPORT */
+function exportStudentsCSV() {
+  const rows = [
+    ["Student ID","Name","Grade","Strand","Contact","Email","Status","Date Added"],
+    ...getStudents().map(s => [s.id,s.name,s.grade,s.strand,s.contact,s.email,s.status,s.dateAdded])
+  ];
+  downloadCSV(rows, "student-records.csv");
+}
+function downloadCSV(rows, filename) {
+  const csv = rows.map(row => row.map(value =>
+    '"' + String(value ?? "").replace(/"/g,'""') + '"'
+  ).join(",")).join("\r\n");
+  const blob = new Blob(["\uFEFF" + csv], {type:"text/csv;charset=utf-8;"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* REPORTS */
+function reportsHTML() {
+  return `
+  <div class="page-heading">
+    <div><h2>Student Reports</h2><p>Enrollment totals and student distribution summaries.</p></div>
+    <div class="button-row"><button class="secondary" onclick="exportStudentsCSV()">Export CSV</button><button class="primary" onclick="window.print()">Print Report</button></div>
+  </div>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-label">Total Students</div><div class="stat-value" id="reportTotal">0</div><div class="stat-note">All recorded students</div></div>
+    <div class="stat-card"><div class="stat-label">Active Students</div><div class="stat-value" id="reportActive">0</div><div class="stat-note">Marked active</div></div>
+    <div class="stat-card"><div class="stat-label">Inactive Students</div><div class="stat-value" id="reportInactive">0</div><div class="stat-note">Marked inactive</div></div>
+    <div class="stat-card"><div class="stat-label">Grade Levels</div><div class="stat-value" id="reportGrades">0</div><div class="stat-note">Distinct grade levels</div></div>
+  </div>
+  <section class="panel">
+    <div class="filters">
+      <div class="field"><label for="reportGrade">Grade Level</label><select id="reportGrade" onchange="renderReports()"><option value="">All Grades</option>${gradeOptions()}</select></div>
+      <div class="field"><label for="reportStrand">Strand</label><select id="reportStrand" onchange="renderReports()"><option value="">All Strands</option>${strandOptions()}</select></div>
+      <div class="field"><label for="reportStatus">Status</label><select id="reportStatus" onchange="renderReports()"><option value="">All Statuses</option><option>Active</option><option>Inactive</option><option>Pending</option></select></div>
+      <div><button class="secondary" onclick="clearReportFilters()">Clear Filters</button></div>
+    </div>
+    <p class="muted" id="reportCount" style="font-size:12px"></p>
+  </section>
+  <div class="chart-grid">
+    <section class="panel"><div class="panel-heading"><h3>Students by Grade Level</h3></div><div id="gradeChart"></div></section>
+    <section class="panel"><div class="panel-heading"><h3>Students by Strand</h3></div><div id="strandChart"></div></section>
+  </div>
+  <section class="panel">
+    <div class="panel-heading"><div><h3>Report Details</h3><p>Records matching selected filters.</p></div></div>
+    <div class="table-wrap"><table><thead><tr><th>Student ID</th><th>Name</th><th>Grade</th><th>Strand</th><th>Contact</th><th>Status</th></tr></thead><tbody id="reportTable"></tbody></table></div>
+    <div id="reportEmpty" class="empty hidden">No records match the selected filters.</div>
+  </section>`;
+}
+function renderBars(id, counts) {
+  const el = document.getElementById(id);
+  const entries = Object.entries(counts).sort((a,b) => a[0].localeCompare(b[0]));
+  const max = Math.max(1, ...entries.map(item => item[1]));
+  el.innerHTML = entries.length ? entries.map(([label,count]) => `
+    <div class="bar-row"><span>${esc(label)}</span><div class="bar-track"><div class="bar-fill" style="width:${count/max*100}%"></div></div><strong>${count}</strong></div>
+  `).join("") : `<div class="empty">No data available.</div>`;
+}
+function renderReports() {
+  if (!document.getElementById("reportTable")) return;
+  const all = getStudents();
+  document.getElementById("reportTotal").textContent = all.length;
+  document.getElementById("reportActive").textContent = all.filter(s => (s.status || "Active") === "Active").length;
+  document.getElementById("reportInactive").textContent = all.filter(s => s.status === "Inactive").length;
+  document.getElementById("reportGrades").textContent = new Set(all.map(s => s.grade).filter(Boolean)).size;
+  const grade = document.getElementById("reportGrade").value;
+  const strand = document.getElementById("reportStrand").value;
+  const status = document.getElementById("reportStatus").value;
+  const data = all.filter(s =>
+    (!grade || s.grade === grade) &&
+    (!strand || s.strand === strand) &&
+    (!status || (s.status || "Active") === status)
+  );
+  const countBy = key => data.reduce((obj,s) => {
+    const value = s[key] || "Not specified";
+    obj[value] = (obj[value] || 0) + 1;
+    return obj;
+  }, {});
+  renderBars("gradeChart", countBy("grade"));
+  renderBars("strandChart", countBy("strand"));
+  document.getElementById("reportTable").innerHTML = data.map(s => `
+    <tr><td>${esc(s.id)}</td><td>${esc(s.name)}</td><td>${esc(s.grade)}</td><td>${esc(s.strand || "—")}</td><td>${esc(s.contact || "—")}</td><td>${statusPill(s.status || "Active")}</td></tr>
+  `).join("");
+  document.getElementById("reportEmpty").classList.toggle("hidden", data.length > 0);
+  document.getElementById("reportCount").textContent = `Showing ${data.length} of ${all.length} student record(s).`;
+}
+function clearReportFilters() {
+  ["reportGrade","reportStrand","reportStatus"].forEach(id => document.getElementById(id).value = "");
+  renderReports();
+}
+
+/* USER MANAGEMENT */
+function usersHTML() {
+  return `
+  <div class="page-heading">
+    <div><h2>User Management</h2><p>Manage demo user profiles, roles, and account status.</p></div>
+    <button class="primary" onclick="openUserModal()">＋ Add User</button>
+  </div>
+  <div class="notice"><strong>Prototype notice:</strong> User profiles are stored in this browser only. Roles do not enforce permissions, and adding a profile does not create login credentials.</div>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-label">Total Users</div><div class="stat-value" id="userTotal">0</div><div class="stat-note">All profiles</div></div>
+    <div class="stat-card"><div class="stat-label">Active Users</div><div class="stat-value" id="userActive">0</div><div class="stat-note">Marked active</div></div>
+    <div class="stat-card"><div class="stat-label">Administrators</div><div class="stat-value" id="userAdmins">0</div><div class="stat-note">Administrator role</div></div>
+    <div class="stat-card"><div class="stat-label">Roles Used</div><div class="stat-value" id="userRoles">0</div><div class="stat-note">Distinct roles</div></div>
+  </div>
+  <section class="panel">
+    <div class="filters">
+      <div class="field"><label for="userSearch">Search users</label><input id="userSearch" placeholder="Name, username, email..." oninput="renderUserTable()"></div>
+      <div class="field"><label for="userFilterRole">Role</label><select id="userFilterRole" onchange="renderUserTable()"><option value="">All Roles</option><option>Administrator</option><option>Registrar</option><option>Teacher</option><option>Staff</option></select></div>
+      <div class="field"><label for="userFilterStatus">Status</label><select id="userFilterStatus" onchange="renderUserTable()"><option value="">All Statuses</option><option>Active</option><option>Inactive</option></select></div>
+      <div><button class="secondary" onclick="clearUserFilters()">Clear Filters</button></div>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>User</th><th>Username</th><th>Role</th><th>Date Added</th><th>Status</th><th>Actions</th></tr></thead><tbody id="userTable"></tbody></table></div>
+    <div id="userEmpty" class="empty hidden">No user accounts found.</div>
+    <p id="userCount" class="footer-note"></p>
+  </section>`;
+}
+function renderUserTable() {
+  if (!document.getElementById("userTable")) return;
+  const all = getUsers();
+  const query = (document.getElementById("userSearch")?.value || "").toLowerCase().trim();
+  const role = document.getElementById("userFilterRole")?.value || "";
+  const status = document.getElementById("userFilterStatus")?.value || "";
+  const data = all.filter(u =>
+    (!query || [u.fullName,u.username,u.email].some(v => String(v || "").toLowerCase().includes(query))) &&
+    (!role || u.role === role) &&
+    (!status || u.status === status)
+  );
+  document.getElementById("userTotal").textContent = all.length;
+  document.getElementById("userActive").textContent = all.filter(u => u.status === "Active").length;
+  document.getElementById("userAdmins").textContent = all.filter(u => u.role === "Administrator").length;
+  document.getElementById("userRoles").textContent = new Set(all.map(u => u.role)).size;
+  document.getElementById("userTable").innerHTML = data.map(u => `
+    <tr><td><div style="display:flex;align-items:center;gap:10px"><div class="top-avatar">${esc(initials(u.fullName))}</div><div><strong>${esc(u.fullName)}</strong><div class="muted">${esc(u.email)}</div></div></div></td>
+    <td>${esc(u.username)}</td><td><span class="pill role">${esc(u.role)}</span></td><td>${esc(u.dateAdded || "—")}</td>
+    <td>${statusPill(u.status)}</td><td><div class="actions"><button class="secondary" onclick="editUser('${esc(u.id)}')">Edit</button><button class="danger" onclick="deleteUser('${esc(u.id)}')">Delete</button></div></td></tr>
+  `).join("");
+  document.getElementById("userEmpty").classList.toggle("hidden", data.length > 0);
+  document.getElementById("userCount").textContent = `Showing ${data.length} of ${all.length} account(s).`;
+}
+function openUserModal(id) {
+  document.getElementById("userForm").reset();
+  document.getElementById("userRecordId").value = "";
+  document.getElementById("userUsername").disabled = false;
+  document.getElementById("userModalTitle").textContent = "Add User";
+  if (id) {
+    const user = getUsers().find(u => u.id === id);
+    if (!user) { alert("User not found."); return; }
+    document.getElementById("userRecordId").value = user.id;
+    document.getElementById("userFullName").value = user.fullName;
+    document.getElementById("userUsername").value = user.username;
+    document.getElementById("userEmail").value = user.email;
+    document.getElementById("userRole").value = user.role;
+    document.getElementById("userStatus").value = user.status;
+    document.getElementById("userUsername").disabled = true;
+    document.getElementById("userModalTitle").textContent = "Edit User";
+  }
+  document.getElementById("userModal").classList.add("show");
+}
+function closeUserModal() {
+  document.getElementById("userModal").classList.remove("show");
+  document.getElementById("userUsername").disabled = false;
+}
+document.getElementById("userForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const id = document.getElementById("userRecordId").value;
+  const user = {
+    id: id || "USR-" + Date.now(),
+    fullName: document.getElementById("userFullName").value.trim(),
+    username: document.getElementById("userUsername").value.trim(),
+    email: document.getElementById("userEmail").value.trim(),
+    role: document.getElementById("userRole").value,
+    status: document.getElementById("userStatus").value,
+    dateAdded: today()
+  };
+  const all = getUsers();
+  if (all.some(u => u.username.toLowerCase() === user.username.toLowerCase() && u.id !== id)) {
+    alert("That username already exists."); return;
+  }
+  if (all.some(u => u.email.toLowerCase() === user.email.toLowerCase() && u.id !== id)) {
+    alert("That email already exists."); return;
+  }
+  if (id) {
+    const index = all.findIndex(u => u.id === id);
+    if (index < 0) { alert("User not found."); return; }
+    user.dateAdded = all[index].dateAdded;
+    all[index] = user;
+  } else {
+    all.push(user);
+  }
+  if (saveUsers(all)) {
+    closeUserModal();
+    renderUserTable();
+  }
+});
+function editUser(id) { openUserModal(id); }
+function deleteUser(id) {
+  const all = getUsers();
+  const user = all.find(u => u.id === id);
+  if (!user) return;
+  if (user.username === "admin") {
+    alert("The demo admin profile cannot be deleted.");
+    return;
+  }
+  if (confirm(`Delete user ${user.fullName}?`) && saveUsers(all.filter(u => u.id !== id))) {
+    renderUserTable();
+  }
+}
+function clearUserFilters() {
+  ["userSearch","userFilterRole","userFilterStatus"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = "";
+  });
+  renderUserTable();
+}
+
+/* CLOSE MODALS */
+document.getElementById("studentModal").addEventListener("click", event => {
+  if (event.target === event.currentTarget) closeStudentModal();
+});
+document.getElementById("userModal").addEventListener("click", event => {
+  if (event.target === event.currentTarget) closeUserModal();
+});
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeStudentModal();
+    closeUserModal();
+  }
+});
+
+/* RESTORE THE DEMO SESSION IF STILL LOGGED IN */
+if (sessionStorage.getItem("khs_sims_logged_in") === "true") {
+  showApp();
+}
+</script>
+</body>
+</html>
